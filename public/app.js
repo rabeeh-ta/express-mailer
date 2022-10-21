@@ -1,7 +1,7 @@
 function NavBar() {
   const [totalMailSend, setTotalMailSend] = React.useState({});
 
-  fetch('http://localhost:3000/mailsStat')
+  fetch('https://pace-mail-service.onrender.com/mailsStat')
     .then((res) => res.json())
     .then((data) => setTotalMailSend(data));
   return (
