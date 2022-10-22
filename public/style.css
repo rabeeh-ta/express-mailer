@@ -27,7 +27,25 @@ nav img{
     padding:10px;
     max-width: 500px;
     height: 500px;
-    background-color: #fff;
+    background-color: #F5EFE6;
 
+      border-image:   linear-gradient(to right, #D54457 25%, #2E5089 25%, #D54457 50%,#2E5089 50%, #D54457 75%, #2E5089 75%) 5;
+    /* #D54457 #2E5089*/
+}
+
+form{
+    margin:20px;
+}
+
+.form--label{
+    margin:10px;
+}
+
+.form--input{
+    margin:10px;
+}
+
+.form--textarea{
+    margin:10px;
 }
 
