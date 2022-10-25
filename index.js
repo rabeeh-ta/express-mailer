@@ -2,11 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const fs = require('fs');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '5mb' }));
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
@@ -22,7 +24,7 @@ app.get('/mails-stat', (req, res) => {
 
 app.post('/send-mail', (req, res) => {
   console.log(req.body);
-  return res.send('mail send');
+  return res.send({ response: 'mail send' });
 });
 
 app.listen(port, () => {

@@ -33,9 +33,25 @@ function LetterBody() {
     });
   }
 
+  async function loadFile(e) {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.addEventListener('load', () => {
+      setMailData((prevData) => ({ ...prevData, attachment: reader.result }));
+    });
+  }
+
   function sendMail(event) {
     event.preventDefault();
-    console.log(mailData);
+    fetch('http://localhost:3000/send-mail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(mailData),
+    })
+      .then((res) => res.json())
+      .then((json) => console.log(json))
+      .catch((err) => console.error('error:' + err));
   }
 
   return (
@@ -76,10 +92,10 @@ function LetterBody() {
 
         <br />
         <label className="form--label">Attachment</label>
-        <input type="file" name="attachment" onChange={handleChange} />
+        <input type="file" name="attachment" onChange={loadFile} />
 
         <br />
-        <button>send</button>
+        <button onClick={sendMail}>send</button>
       </form>
     </section>
   );
