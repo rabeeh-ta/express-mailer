@@ -1,8 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
 const fs = require('fs');
+
+const sendMail = require('./mailer');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -23,8 +24,12 @@ app.get('/mails-stat', (req, res) => {
 });
 
 app.post('/send-mail', (req, res) => {
+  const { toEmail, subject, message } = req.body;
   console.log(req.body);
-  return res.send({ response: 'mail send' });
+  // fs.writeFileSync('./image.txt', req.body.attachment);
+  sendMail(toEmail, subject, message).then((mailSendRes) => {
+    res.send({ response: mailSendRes });
+  });
 });
 
 app.listen(port, () => {

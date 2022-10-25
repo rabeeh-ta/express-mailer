@@ -36,7 +36,8 @@ function LetterBody() {
   async function loadFile(e) {
     const file = e.target.files[0];
     const reader = new FileReader();
-    reader.readAsBinaryString(file);
+    reader.readAsDataURL(file);
+
     reader.addEventListener('load', () => {
       setMailData((prevData) => ({ ...prevData, attachment: reader.result }));
     });
