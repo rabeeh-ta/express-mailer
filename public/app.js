@@ -1,11 +1,13 @@
 function NavBar() {
   const [totalMailSend, setTotalMailSend] = React.useState();
 
-  fetch('https://pace-mail-service.onrender.com/mailsStat')
-    .then((res) => res.json())
-    .then((data) => {
-      setTotalMailSend(data.count);
-    });
+  React.useEffect(() => {
+    fetch('https://pace-mail-service.onrender.com/mails-stat')
+      .then((res) => res.json())
+      .then((data) => {
+        setTotalMailSend(data.count);
+      });
+  }, []);
 
   return (
     <nav>
@@ -31,19 +33,21 @@ function LetterBody() {
     });
   }
 
-  function sendMail() {
+  function sendMail(event) {
+    event.preventDefault();
     console.log(mailData);
   }
 
   return (
     <section className="letter">
-      <form>
+      <form onSubmit={sendMail}>
         <label className="form--label">To</label>
         <input
           className="form--input"
           type="text"
           name="toEmail"
           placeholder="username@example.com"
+          value={mailData.toEmail}
           onChange={handleChange}
         />
 
@@ -54,6 +58,7 @@ function LetterBody() {
           type="text"
           name="subject"
           placeholder=""
+          value={mailData.subject}
           onChange={handleChange}
         />
 
@@ -63,6 +68,7 @@ function LetterBody() {
           className="form--textarea"
           name="message"
           id=""
+          value={mailData.message}
           cols="30"
           rows="10"
           onChange={handleChange}
@@ -70,12 +76,10 @@ function LetterBody() {
 
         <br />
         <label className="form--label">Attachment</label>
-        <input type="file" />
+        <input type="file" name="attachment" onChange={handleChange} />
 
         <br />
-        <button type="button" onClick={sendMail}>
-          send
-        </button>
+        <button>send</button>
       </form>
     </section>
   );

@@ -1,15 +1,28 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors());
+app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.send('./public/index.html');
+  return res.send('./public/index.html');
 });
 
-app.get('/mailsStat', (req, res) => {
-  res.send({ message: 'total number of mails send', count: 193 });
+app.get('/mails-stat', (req, res) => {
+  return res.send({
+    message: 'total number of mails send',
+    count: Math.round(Math.random() * 500),
+  });
+});
+
+app.post('/send-mail', (req, res) => {
+  console.log(req.body);
+  return res.send('mail send');
 });
 
 app.listen(port, () => {
