@@ -26,7 +26,6 @@ function LetterBody() {
   });
 
   function handleChange(e) {
-    console.log(e.target.name, e.target.value);
     setMailData({
       ...mailData,
       [e.target.name]: e.target.value,
@@ -45,13 +44,13 @@ function LetterBody() {
 
   function sendMail(event) {
     event.preventDefault();
-    fetch('http://localhost:3000/send-mail', {
+    fetch('https://pace-mail-service.onrender.com/send-mail', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(mailData),
     })
       .then((res) => res.json())
-      .then((json) => console.log(json))
+      .then((json) => alert('mail sent successfully'))
       .catch((err) => console.error('error:' + err));
   }
 

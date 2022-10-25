@@ -28,7 +28,7 @@ app.post('/send-mail', (req, res) => {
   console.log(req.body);
   // fs.writeFileSync('./image.txt', req.body.attachment);
   sendMail(toEmail, subject, message).then((mailSendRes) => {
-    res.send({ response: mailSendRes });
+    res.send({ response: 'mail sent' });
   });
 });
 
