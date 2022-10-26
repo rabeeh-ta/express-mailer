@@ -1,7 +1,14 @@
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 
-async function sendMail(toEmail, subject, message) {
+async function sendMail(
+  toEmail,
+  subject,
+  message,
+  { data, fileFormat, encoding }
+) {
+  console.log('sending mail');
+
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
@@ -14,15 +21,13 @@ async function sendMail(toEmail, subject, message) {
     to: toEmail,
     subject: subject,
     text: message,
-    // attachments: [
-    //   {
-    //     // encoded string as an attachment
-    //     filename: 'img.png',
-    //     content:
-    //       'iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==',
-    //     encoding: 'base64',
-    //   },
-    // ],
+    attachments: [
+      {
+        filename: `file.${fileFormat}`,
+        content: data,
+        encoding: encoding,
+      },
+    ],
   };
 
   await transporter.sendMail(mailOptions, function (error, info) {

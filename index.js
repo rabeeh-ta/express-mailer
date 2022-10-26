@@ -4,6 +4,7 @@ const cors = require('cors');
 const fs = require('fs');
 
 const sendMail = require('./mailer');
+const dataUriParser = require('./dataUriParser');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -25,10 +26,12 @@ app.get('/mails-stat', (req, res) => {
 
 app.post('/send-mail', (req, res) => {
   const { toEmail, subject, message } = req.body;
-  console.log(req.body);
-  // fs.writeFileSync('./image.txt', req.body.attachment);
-  sendMail(toEmail, subject, message).then((mailSendRes) => {
-    res.send({ response: 'mail sent' });
+  const attachment = dataUriParser(req.body.attachment.toString());
+
+  // console.log(req.body);
+  // console.log(attachment);
+  sendMail(toEmail, subject, message, attachment).then((mailSendRes) => {
+    res.send({ response: 'mail sent successfully' });
   });
 });
 

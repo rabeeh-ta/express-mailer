@@ -50,7 +50,9 @@ function LetterBody() {
       body: JSON.stringify(mailData),
     })
       .then((res) => res.json())
-      .then((json) => alert('mail sent successfully'))
+      .then((json) => {
+        alert(json.response);
+      })
       .catch((err) => console.error('error:' + err));
   }
 
