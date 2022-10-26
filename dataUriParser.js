@@ -1,7 +1,5 @@
 const fs = require('fs');
 
-const dataUri = fs.readFileSync('./imgdot.txt');
-
 function dataUriParser(uri) {
   const [meta, data] = uri.split(',');
   const fileType = meta.match(':([^;]*);')[1].split('/');
