@@ -52,6 +52,7 @@ function LetterBody() {
       .then((res) => res.json())
       .then((json) => {
         alert(json.response);
+        location.reload();
       })
       .catch((err) => console.error('error:' + err));
   }
@@ -94,7 +95,12 @@ function LetterBody() {
 
         <br />
         <label className="form--label">Attachment</label>
-        <input type="file" name="attachment" onChange={loadFile} />
+        <input
+          type="file"
+          accept="image/*"
+          name="attachment"
+          onChange={loadFile}
+        />
 
         <br />
         <button onClick={sendMail}>send</button>

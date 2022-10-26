@@ -7,8 +7,6 @@ async function sendMail(
   message,
   { data, fileFormat, encoding }
 ) {
-  console.log('sending mail');
-
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {

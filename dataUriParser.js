@@ -15,5 +15,3 @@ function dataUriParser(uri) {
 }
 
 module.exports = dataUriParser;
-
-// console.log(dataUriParser(dataUri.toString()));
