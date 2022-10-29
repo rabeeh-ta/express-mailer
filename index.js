@@ -28,8 +28,6 @@ app.post('/send-mail', (req, res) => {
   const { toEmail, subject, message } = req.body;
   const attachment = dataUriParser(req.body.attachment.toString());
 
-  // console.log(req.body);
-  // console.log(attachment);
   sendMail(toEmail, subject, message, attachment).then((mailSendRes) => {
     res.send({ response: 'mail sent successfully' });
   });

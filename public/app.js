@@ -60,7 +60,7 @@ function LetterBody() {
   return (
     <section className="letter">
       <form onSubmit={sendMail}>
-        <label className="form--label">To</label>
+        <label className="form--label">ToEmail</label>
         <input
           className="form--input"
           type="text"
@@ -76,13 +76,13 @@ function LetterBody() {
           className="form--input"
           type="text"
           name="subject"
-          placeholder=""
+          placeholder="aloha"
           value={mailData.subject}
           onChange={handleChange}
         />
 
         <br />
-        <label className="form--label">Subject</label>
+        <label className="form--label">Message</label>
         <textarea
           className="form--textarea"
           name="message"
@@ -103,7 +103,9 @@ function LetterBody() {
         />
 
         <br />
-        <button onClick={sendMail}>send</button>
+        <button className="btn" onClick={sendMail}>
+          send
+        </button>
       </form>
     </section>
   );
